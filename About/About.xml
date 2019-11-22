@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Trait Rarity Colors</name>
+	<author>Carny Senpai</author>
+	<supportedVersions>
+		<li>1.0</li>
+	</supportedVersions>
+	<description>Changes the color of traits based on their rarity.
+	</description>
+</ModMetaData>
