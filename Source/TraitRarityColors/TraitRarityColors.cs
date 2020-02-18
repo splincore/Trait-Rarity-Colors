@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Linq;
 using Verse;
 
 namespace TraitRarityColors
@@ -7,6 +8,17 @@ namespace TraitRarityColors
     internal static class TraitRarityColors
     {
         static TraitRarityColors()
+        {
+            RefreshColors();
+        }
+
+        public static int GetCountForColor(string color)
+        {
+            RefreshColors();
+            return DefDatabase<TraitDef>.AllDefsListForReading.SelectMany(t => t.degreeDatas).Where(d => d.label.Contains(color)).Count();
+        }
+
+        private static void RefreshColors()
         {
             foreach (TraitDef traitDef in DefDatabase<TraitDef>.AllDefsListForReading)
             {
@@ -21,7 +33,7 @@ namespace TraitRarityColors
                     {
                         traitDegreeData.label = color + traitDegreeData.label.CapitalizeFirst() + "</color>";
                     }
-                    else if (LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().overrideCustomColors)
+                    else
                     {
                         traitDegreeData.label = traitDegreeData.label.Remove(0, 15).Replace("</color>", "");
                         traitDegreeData.label = color + traitDegreeData.label.CapitalizeFirst() + "</color>";
@@ -33,27 +45,27 @@ namespace TraitRarityColors
         public static string GetColorForRarity(float rarity)
         {
 
-            if (rarity <= 0.1f)
+            if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitMystic) // Default: 0.1f
             {
-                return "<color=#FF0000>"; // Red
+                return "<color=#FF0000>"; // Mystic: Red
             }
-            if (rarity <= 0.5f)
+            if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitLegendary) // Default: 0.5f
             {
-                return "<color=#FF9900>"; // Orange
+                return "<color=#FF9900>"; // Legendary: Orange
             }
-            if (rarity <= 0.9f)
+            if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitEpic) // Default: 0.9f
             {
-                return "<color=#CC00FF>"; //Purple
+                return "<color=#cc0099>"; // Epic: Purple
             }
-            if (rarity <= 1.9f)
+            if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitRare) // Default: 1.9f
             {
-                return "<color=#0066FF>"; //Blue
+                return "<color=#0073e6>"; // Rare: Blue
             }
-            if (rarity <= 2.0f)
+            if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitUncommon) // Default: 2.0f
             {
-                return "<color=#00CC00>"; //Green
+                return "<color=#00ff00>"; // Uncommon: Green
             }
-            return "<color=#FFFFFF>"; //White
+            return "<color=#FFFFFF>"; // Common: White
         }
     }
 }
