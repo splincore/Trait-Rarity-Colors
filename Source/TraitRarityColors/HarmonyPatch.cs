@@ -1,4 +1,4 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 using RimWorld;
 using Verse;
 
@@ -9,7 +9,7 @@ namespace TraitRarityColors
     {
         static HarmonyPatch()
         {
-            var harmony = HarmonyInstance.Create("rimworld.carnysenpai.traitraritycolors");
+            var harmony = new Harmony("rimworld.carnysenpai.traitraritycolors");
             harmony.Patch(AccessTools.Method(typeof(Trait), "get_Label"), null, new HarmonyMethod(typeof(HarmonyPatch).GetMethod("Get_Label_PostFix")), null);
         }
 
