@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<ShowTraitRarityOverlayToggleButton>Toggle the trait display.\n\nShow the traits of pawns directly under them.</ShowTraitRarityOverlayToggleButton>
+	<TraitRarityNoPawnSelected>No pawn</TraitRarityNoPawnSelected>
+
+</LanguageData>
