@@ -18,6 +18,9 @@ namespace TraitRarityColors
             listingStandard.Begin(inRect);
             listingStandard.Label("Changing anything needs a restart of the game to be applied!");
 
+            listingStandard.Gap(10f);
+            listingStandard.CheckboxLabeled("Ignore trait colors from other mods", ref traitRarityColorsModSettings.ignoreCustomTraitColors);
+
             // Mystic
             listingStandard.Gap(10f);
             if (listingStandard.ButtonTextLabeled(traitRarityColorsModSettings.colorMystic + "Mystic traits:</color> " + TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorMystic), "Change mystic color"))

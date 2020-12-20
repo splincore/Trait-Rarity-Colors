@@ -30,7 +30,7 @@ namespace TraitRarityColors
 
         public static void DrawInfowWindow(Pawn pawn)
         {
-            string text = pawn.LabelCap + ": " + string.Join(", ", pawn.story.traits.allTraits.Select(t => t.CurrentData.label));
+            string text = pawn.LabelCap + ": " + string.Join(", ", pawn.story.traits.allTraits.Select(t => t.CurrentData.label.CapitalizeFirst()));
             float cellSizePixels = Find.CameraDriver.CellSizePixels;
             Text.Font = GameFont.Small;
             Vector2 vector = new Vector2(cellSizePixels, cellSizePixels);

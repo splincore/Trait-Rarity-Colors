@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -9,6 +10,18 @@ namespace TraitRarityColors
     {
         static TraitRarityColors()
         {
+            HashSet<string> traitsToIgnore = new HashSet<string>();
+            foreach (TraitDef traitDef in DefDatabase<TraitDef>.AllDefsListForReading)
+            {
+                foreach (TraitDegreeData traitDegreeData in traitDef.degreeDatas)
+                {
+                    if (traitDegreeData.label.Contains("<color=#"))
+                    {
+                        traitsToIgnore.Add(traitDegreeData.label);
+                    }
+                }
+            }
+            LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().traitsToIgnore = traitsToIgnore;
             RefreshColors();
         }
 
@@ -20,6 +33,9 @@ namespace TraitRarityColors
 
         private static void RefreshColors()
         {
+            bool ignoreCustomTraitColors = LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().ignoreCustomTraitColors;
+            HashSet<string> traitsToIgnore = LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().traitsToIgnore;
+
             foreach (TraitDef traitDef in DefDatabase<TraitDef>.AllDefsListForReading)
             {
                 foreach (TraitDegreeData traitDegreeData in traitDef.degreeDatas)
@@ -33,7 +49,7 @@ namespace TraitRarityColors
                     {
                         traitDegreeData.label = color + traitDegreeData.label.CapitalizeFirst() + "</color>";
                     }
-                    else
+                    else if (ignoreCustomTraitColors || !traitsToIgnore.Contains(traitDegreeData.label))
                     {
                         traitDegreeData.label = traitDegreeData.label.Remove(0, 15).Replace("</color>", "");
                         traitDegreeData.label = color + traitDegreeData.label.CapitalizeFirst() + "</color>";
