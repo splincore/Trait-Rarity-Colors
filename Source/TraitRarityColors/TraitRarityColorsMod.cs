@@ -19,7 +19,7 @@ namespace TraitRarityColors
             listingStandard.Label("Changing anything needs a restart of the game to be applied!");
 
             listingStandard.Gap(10f);
-            listingStandard.CheckboxLabeled("Ignore trait colors from other mods", ref traitRarityColorsModSettings.ignoreCustomTraitColors);
+            listingStandard.CheckboxLabeled("Overwrite trait colors from other mods", ref traitRarityColorsModSettings.ignoreCustomTraitColors);
 
             // Mystic
             listingStandard.Gap(10f);
