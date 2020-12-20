@@ -11,6 +11,13 @@ namespace TraitRarityColors
         public float maxLimitUncommon = 2.0f;
         // common is the rest
 
+        public string colorMystic = "<color=#FF0000>";
+        public string colorLegendary = "<color=#FF9900>";
+        public string colorEpic = "<color=#cc0099>";
+        public string colorRare = "<color=#0073e6>";
+        public string colorUncommon = "<color=#00ff00>";
+        public string colorCommon = "<color=#FFFFFF>";
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -19,6 +26,13 @@ namespace TraitRarityColors
             Scribe_Values.Look<float>(ref maxLimitEpic, "maxLimitEpic", 0.9f, false);
             Scribe_Values.Look<float>(ref maxLimitRare, "maxLimitRare", 1.9f, false);
             Scribe_Values.Look<float>(ref maxLimitUncommon, "maxLimitUncommon", 2.0f, false);
+
+            Scribe_Values.Look<string>(ref colorMystic, "colorMystic", "<color=#FF0000>", false);
+            Scribe_Values.Look<string>(ref colorLegendary, "colorLegendary", "<color=#FF9900>", false);
+            Scribe_Values.Look<string>(ref colorEpic, "colorEpic", "<color=#cc0099>", false);
+            Scribe_Values.Look<string>(ref colorRare, "colorRare", "<color=#0073e6>", false);
+            Scribe_Values.Look<string>(ref colorUncommon, "colorUncommon", "<color=#00ff00>", false);
+            Scribe_Values.Look<string>(ref colorCommon, "colorCommon", "<color=#FFFFFF>", false);
         }
     }
 }

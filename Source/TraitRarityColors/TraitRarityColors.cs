@@ -47,25 +47,25 @@ namespace TraitRarityColors
 
             if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitMystic) // Default: 0.1f
             {
-                return "<color=#FF0000>"; // Mystic: Red
+                return LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorMystic; // Mystic: Red <color=#FF0000>
             }
             if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitLegendary) // Default: 0.5f
             {
-                return "<color=#FF9900>"; // Legendary: Orange
+                return LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorLegendary; // Legendary: Orange <color=#FF9900>
             }
             if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitEpic) // Default: 0.9f
             {
-                return "<color=#cc0099>"; // Epic: Purple
+                return LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorEpic; // Epic: Purple <color=#cc0099>
             }
             if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitRare) // Default: 1.9f
             {
-                return "<color=#0073e6>"; // Rare: Blue
+                return LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorRare; // Rare: Blue <color=#0073e6>
             }
             if (rarity <= LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().maxLimitUncommon) // Default: 2.0f
             {
-                return "<color=#00ff00>"; // Uncommon: Green
+                return LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorUncommon; // Uncommon: Green <color=#00ff00>
             }
-            return "<color=#FFFFFF>"; // Common: White
+            return LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorCommon; // Common: White <color=#FFFFFF>
         }
     }
 }

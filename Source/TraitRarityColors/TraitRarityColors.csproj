@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HarmonyPatch.cs" />
+    <Compile Include="TraitRarityColorChangeWindow.cs" />
     <Compile Include="TraitRarityOverlayDrawer.cs" />
     <Compile Include="TraitTexButton.cs" />
     <Compile Include="TraitRarityColors.cs" />
