@@ -73,6 +73,7 @@ namespace TraitRarityColors
                     Text.Anchor = TextAnchor.MiddleCenter;
                     Widgets.Label(labelRect, traitDegreeData.label);
                     Text.Anchor = TextAnchor.UpperLeft;
+                    TooltipHandler.TipRegion(labelRect, traitDegreeData.description);
                     Rect buttonRect = traitRect.RightHalf();
                     if (Widgets.ButtonText(traitRect.LeftHalf().LeftHalf(), "<<< Lower Tier")) TraitRarityColors.LowerTierFor(traitDegreeData.label);
                     if (Widgets.ButtonText(traitRect.RightHalf().RightHalf(), "Higher Tier >>>")) TraitRarityColors.IncreaseTierFor(traitDegreeData.label);
