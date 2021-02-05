@@ -5,8 +5,10 @@ namespace TraitRarityColors
 {
     public class TraitRarityColorsModSettings : ModSettings
     {
+        public bool useCustomTraitTiers = false;
         public bool ignoreCustomTraitColors = true;
         public HashSet<string> traitsToIgnore = new HashSet<string>();
+        public Dictionary<string, int> traitTiers = new Dictionary<string, int>();
 
         public float maxLimitMystic = 0.1f;
         public float maxLimitLegendary = 0.5f;
@@ -25,13 +27,19 @@ namespace TraitRarityColors
         public override void ExposeData()
         {
             base.ExposeData();
+            Scribe_Values.Look<bool>(ref useCustomTraitTiers, "useCustomTraitTiers", false);
             Scribe_Values.Look<bool>(ref ignoreCustomTraitColors, "ignoreCustomTraitColors", true);
             Scribe_Collections.Look(ref traitsToIgnore, false, "traitsToIgnore");
             if (traitsToIgnore == null)
             {
                 traitsToIgnore = new HashSet<string>();
             }
-
+            Scribe_Collections.Look<string, int>(ref traitTiers, "traitTiers");
+            if (traitTiers == null)
+            {
+                traitTiers = new Dictionary<string, int>();
+            }
+            
             Scribe_Values.Look<float>(ref maxLimitMystic, "maxLimitMystic", 0.1f, false);
             Scribe_Values.Look<float>(ref maxLimitLegendary, "maxLimitLegendary", 0.5f, false);
             Scribe_Values.Look<float>(ref maxLimitEpic, "maxLimitEpic", 0.9f, false);
