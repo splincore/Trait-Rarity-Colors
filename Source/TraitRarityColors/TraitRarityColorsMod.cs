@@ -20,6 +20,14 @@ namespace TraitRarityColors
 
             listingStandard.Gap(10f);
             listingStandard.CheckboxLabeled("Use custom trait tiers", ref traitRarityColorsModSettings.useCustomTraitTiers, "If enabled for teh first time, the default tier for each trait is its current rarity");
+            if (traitRarityColorsModSettings.useCustomTraitTiers)
+            {
+                listingStandard.Gap(10f);
+                if (listingStandard.ButtonText("Configure custom trait tiers..."))
+                {
+                    Find.WindowStack.Add(new TraitRarityColorCustomTierWindow());
+                }
+            }
             if (!traitRarityColorsModSettings.useCustomTraitTiers)
             {
                 listingStandard.Gap(2f);
@@ -120,15 +128,6 @@ namespace TraitRarityColors
                 traitRarityColorsModSettings.colorRare = "<color=#0073e6>";
                 traitRarityColorsModSettings.colorUncommon = "<color=#00ff00>";
                 traitRarityColorsModSettings.colorCommon = "<color=#FFFFFF>";
-            }
-
-            if (traitRarityColorsModSettings.useCustomTraitTiers)
-            {
-                listingStandard.Gap(10f);
-                if (listingStandard.ButtonText("Configure custom trait tiers..."))
-                {
-                    Find.WindowStack.Add(new TraitRarityColorCustomTierWindow());
-                }
             }
 
             listingStandard.End();
