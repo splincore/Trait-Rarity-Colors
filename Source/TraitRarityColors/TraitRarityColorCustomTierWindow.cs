@@ -25,22 +25,22 @@ namespace TraitRarityColors
         {
             Text.Anchor = TextAnchor.MiddleCenter;
             Rect mysticRect = new Rect(inRect.width * (5f / 6f), 0, inRect.width / 6, 48);
-            Widgets.Label(mysticRect.TopHalf(), LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorMystic + "Mystic</color>");
+            Widgets.Label(mysticRect.TopHalf(), string.Format("{0}{1}</color>", LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorMystic, "TraitRarityMystic".Translate()));
             Widgets.Label(mysticRect.BottomHalf(), TraitRarityColors.GetCountForColor(LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorMystic).ToString());
             Rect legendaryRect = new Rect(inRect.width * (4f / 6f), 0, inRect.width / 6, 48);
-            Widgets.Label(legendaryRect.TopHalf(), LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorLegendary + "Legendary</color>");
+            Widgets.Label(legendaryRect.TopHalf(), string.Format("{0}{1}</color>", LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorLegendary, "TraitRarityLegendary".Translate()));
             Widgets.Label(legendaryRect.BottomHalf(), TraitRarityColors.GetCountForColor(LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorLegendary).ToString());
             Rect epicRect = new Rect(inRect.width * (3f / 6f), 0, inRect.width / 6, 48);
-            Widgets.Label(epicRect.TopHalf(), LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorEpic + "Epic</color>");
+            Widgets.Label(epicRect.TopHalf(), string.Format("{0}{1}</color>", LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorEpic, "TraitRarityEpic".Translate()));
             Widgets.Label(epicRect.BottomHalf(), TraitRarityColors.GetCountForColor(LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorEpic).ToString());
             Rect rareRect = new Rect(inRect.width * (2f / 6f), 0, inRect.width / 6, 48);
-            Widgets.Label(rareRect.TopHalf(), LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorRare + "Rare</color>");
+            Widgets.Label(rareRect.TopHalf(), string.Format("{0}{1}</color>", LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorRare, "TraitRarityRare".Translate()));
             Widgets.Label(rareRect.BottomHalf(), TraitRarityColors.GetCountForColor(LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorRare).ToString());
             Rect uncommonRect = new Rect(inRect.width * (1f / 6f), 0, inRect.width / 6, 48);
-            Widgets.Label(uncommonRect.TopHalf(), LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorUncommon + "Uncommon</color>");
+            Widgets.Label(uncommonRect.TopHalf(), string.Format("{0}{1}</color>", LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorUncommon, "TraitRarityUncommon".Translate()));
             Widgets.Label(uncommonRect.BottomHalf(), TraitRarityColors.GetCountForColor(LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorUncommon).ToString());
             Rect commonRect = new Rect(inRect.width * (0f / 6f), 0, inRect.width / 6, 48);
-            Widgets.Label(commonRect.TopHalf(), LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorCommon + "Common</color>");
+            Widgets.Label(commonRect.TopHalf(), string.Format("{0}{1}</color>", LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorCommon, "TraitRarityCommon".Translate()));
             Widgets.Label(commonRect.BottomHalf(), TraitRarityColors.GetCountForColor(LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().colorCommon).ToString());
             Text.Anchor = TextAnchor.UpperLeft;
 
@@ -75,8 +75,8 @@ namespace TraitRarityColors
                     Text.Anchor = TextAnchor.UpperLeft;
                     TooltipHandler.TipRegion(labelRect, traitDegreeData.description);
                     Rect buttonRect = traitRect.RightHalf();
-                    if (Widgets.ButtonText(traitRect.LeftHalf().LeftHalf(), "<<< Lower Tier")) TraitRarityColors.LowerTierFor(traitDegreeData.label);
-                    if (Widgets.ButtonText(traitRect.RightHalf().RightHalf(), "Higher Tier >>>")) TraitRarityColors.IncreaseTierFor(traitDegreeData.label);
+                    if (Widgets.ButtonText(traitRect.LeftHalf().LeftHalf(), "TraitRarityLowerTierLabel".Translate())) TraitRarityColors.LowerTierFor(traitDegreeData.label);
+                    if (Widgets.ButtonText(traitRect.RightHalf().RightHalf(), "TraitRarityLowerHigherLabel".Translate())) TraitRarityColors.IncreaseTierFor(traitDegreeData.label);
                     currentY += 30;
                 }
             }
@@ -93,7 +93,7 @@ namespace TraitRarityColors
                 this.Close(true);
                 Event.current.Use();
             }
-            if (Widgets.ButtonText(rectReset, "Reset to default"))
+            if (Widgets.ButtonText(rectReset, "TraitRarityResetButtonLabel".Translate()))
             {
                 LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().traitTiers = new Dictionary<string, int>();
             }

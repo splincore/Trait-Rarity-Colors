@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- Mod Options -->
+	<TraitRarityWarningLabel>Änderungen benötigens höchstwahrscheinlich einen Neustart!</TraitRarityWarningLabel>
+	<TraitRarityWarningDescription>Falls in der aktuellen Sitzung noch kein Spielstand geladen (oder Kolonie erstellt) wurde, wird ein Neustart nicht benötigt. Rimworld lädt alle Merkmal Namen in den Zwischenspeicher sobald ein Spielstand geladen (oder eine Kolonie erstellt) wird.</TraitRarityWarningDescription>
+	<TraitRarityCustomTierLabel>Nutze benutzerdefinierte Merkmal Ränge</TraitRarityCustomTierLabel>
+	<TraitRarityCustomTierDescription>Wenn zum ersten mal aktiviert, werden alle Merkmale anhand der zuvor eingestellten Häufigkeit einsortiert.</TraitRarityCustomTierDescription>
+	<TraitRarityCustomTierConfigurationLabel>Bearbeite benutzerdefinierte Merkmal Ränge...</TraitRarityCustomTierConfigurationLabel>
+	<TraitRarityOverwriteLabel>Überschreibe Merkmal Farben anderer Mods</TraitRarityOverwriteLabel>
+	<TraitRarityCustomTierConfigurationDescription>Sollten andere Mods eigene Farben für Merkmale haben, werden diese nicht verändert. Ist die benutzerdefinierte Merkmal Rang Einstellung aktiviert, werden Farben anderer Mods immer überschrieben.</TraitRarityCustomTierConfigurationDescription>
+	
+	<TraitRarityMaxMommonality>Maximale Häufigkeit</TraitRarityMaxMommonality>
+	
+	<TraitRarityCountMystic>Mystische Merkmale</TraitRarityCountMystic>
+	<TraitRarityChangeColorMystic>Ändere mystische Farbe...</TraitRarityChangeColorMystic>
+	<TraitRarityCountLegendary>Legendäre Merkmale</TraitRarityCountLegendary>
+	<TraitRarityChangeColorLegendary>Ändere legendäre Farbe...</TraitRarityChangeColorLegendary>
+	<TraitRarityCountEpic>Epische Merkmale</TraitRarityCountEpic>
+	<TraitRarityChangeColorEpic>Ändere epische Farbe...</TraitRarityChangeColorEpic>
+	<TraitRarityCountRare>Seltene Merkmale</TraitRarityCountRare>
+	<TraitRarityChangeColorRare>Ändere seltene Farbe...</TraitRarityChangeColorRare>
+	<TraitRarityCountUncommon>Ungewöhnliche Merkmale</TraitRarityCountUncommon>
+	<TraitRarityChangeColorUncommon>Ändere ungewöhnliche Farbe...</TraitRarityChangeColorUncommon>
+	<TraitRarityCountCommon>Häufige Merkmale</TraitRarityCountCommon>
+	<TraitRarityChangeColorCommon>Ändere häufige Farbe...</TraitRarityChangeColorCommon>
+	
+	<TraitRarityResetLimitsLabel>Standard Häufigkeiten wiederherstellen</TraitRarityResetLimitsLabel>
+	<TraitRarityResetColorsLabel>Standard Farben wiederherstellen</TraitRarityResetColorsLabel>
+
+	<!-- Tier Customization Window -->
+	<TraitRarityMystic>Mystisch</TraitRarityMystic>
+	<TraitRarityLegendary>Legendär</TraitRarityLegendary>
+	<TraitRarityEpic>Episch</TraitRarityEpic>
+	<TraitRarityRare>Selten</TraitRarityRare>
+	<TraitRarityUncommon>Ungewöhnlich</TraitRarityUncommon>
+	<TraitRarityCommon>Häufig</TraitRarityCommon>
+	<TraitRarityLowerTierLabel>&lt;&lt;&lt; Senke Rang</TraitRarityLowerTierLabel>
+	<TraitRarityLowerHigherLabel>Erhöhe Rang &gt;&gt;&gt;</TraitRarityLowerHigherLabel>
+	<TraitRarityResetButtonLabel>Standard\nwiederherstellen</TraitRarityResetButtonLabel>
+	
+	<!-- Color Change Window -->
+	<TraitRarityChangeColorLabel>Ändere Farbe für:</TraitRarityChangeColorLabel>
+	<TraitRarityResetColorLabel>Standard Farbe wiederherstellen</TraitRarityResetColorLabel>
+	
+	<!-- Overlay -->
+	<ShowTraitRarityOverlayToggleButton>Schalte das Anzeigen der Merkale direkt unter den Personen auf der Map ein/aus.</ShowTraitRarityOverlayToggleButton>
+	<TraitRarityNoPawnSelected>Keine Person</TraitRarityNoPawnSelected>
+</LanguageData>

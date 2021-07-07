@@ -35,7 +35,7 @@ namespace TraitRarityColors
         {
             Listing_Standard listingStandard = new Listing_Standard();
             listingStandard.Begin(inRect);
-            listingStandard.Label("Changing the color for: " + rarityColor + rarity.CapitalizeFirst() + "</color>");
+            listingStandard.Label(string.Format("{0} {1}{2}</color>", "TraitRarityChangeColorLabel".Translate(), rarityColor, ("TraitRarity" + rarity.CapitalizeFirst()).Translate()));
 
             listingStandard.Gap(10f);
             listingStandard.Label("<color=#FF0000>Red</color>");
@@ -53,7 +53,7 @@ namespace TraitRarityColors
             colorB = Widgets.HorizontalSlider(rectB, colorB, 0f, 255f, false, colorB.ToString(), "0", "255", 1f);
 
             listingStandard.Gap(10f);
-            if (listingStandard.ButtonText("Reset to default color"))
+            if (listingStandard.ButtonText("TraitRarityResetColorLabel".Translate()))
             {
                 rarityColor = defaultRarityColor;
                 SetRGBColors();

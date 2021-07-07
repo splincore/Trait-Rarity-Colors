@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- Mod Options -->
+	<TraitRarityWarningLabel>Changing anything may need a restart of the game to be applied!</TraitRarityWarningLabel>
+	<TraitRarityWarningDescription>If you have not loaded a save (or created a colony) in the current session, a restart is not required. Rimworld loads all trait labels in the cache as soon, as a save is loaded (or a colony created).</TraitRarityWarningDescription>
+	<TraitRarityCustomTierLabel>Use custom trait tiers</TraitRarityCustomTierLabel>
+	<TraitRarityCustomTierDescription>If enabled for the first time, the default tier for each trait is its current rarity.</TraitRarityCustomTierDescription>
+	<TraitRarityCustomTierConfigurationLabel>Configure custom trait tiers...</TraitRarityCustomTierConfigurationLabel>
+	<TraitRarityOverwriteLabel>Overwrite trait colors from other mods</TraitRarityOverwriteLabel>
+	<TraitRarityCustomTierConfigurationDescription>If other Mods use their own trait colors, those colors will not be overwritten. If the custom trait tier option is enabled, other Mod's trait colors will always be overwritten.</TraitRarityCustomTierConfigurationDescription>
+	
+	<TraitRarityMaxMommonality>Max commonality</TraitRarityMaxMommonality>
+	
+	<TraitRarityCountMystic>Mystic traits</TraitRarityCountMystic>
+	<TraitRarityChangeColorMystic>Change mystic color...</TraitRarityChangeColorMystic>
+	<TraitRarityCountLegendary>Legendary traits</TraitRarityCountLegendary>
+	<TraitRarityChangeColorLegendary>Change legendary color...</TraitRarityChangeColorLegendary>
+	<TraitRarityCountEpic>Epic traits</TraitRarityCountEpic>
+	<TraitRarityChangeColorEpic>Change epic color...</TraitRarityChangeColorEpic>
+	<TraitRarityCountRare>Rare traits</TraitRarityCountRare>
+	<TraitRarityChangeColorRare>Change rare color...</TraitRarityChangeColorRare>
+	<TraitRarityCountUncommon>Uncommon traits</TraitRarityCountUncommon>
+	<TraitRarityChangeColorUncommon>Change uncommon color...</TraitRarityChangeColorUncommon>
+	<TraitRarityCountCommon>Common traits</TraitRarityCountCommon>
+	<TraitRarityChangeColorCommon>Change common color...</TraitRarityChangeColorCommon>
+	
+	<TraitRarityResetLimitsLabel>Reset limits to default</TraitRarityResetLimitsLabel>
+	<TraitRarityResetColorsLabel>Reset colors to default</TraitRarityResetColorsLabel>
+
+	<!-- Tier Customization Window -->
+	<TraitRarityMystic>Mystic</TraitRarityMystic>
+	<TraitRarityLegendary>Legendary</TraitRarityLegendary>
+	<TraitRarityEpic>Epic</TraitRarityEpic>
+	<TraitRarityRare>Rare</TraitRarityRare>
+	<TraitRarityUncommon>Uncommon</TraitRarityUncommon>
+	<TraitRarityCommon>Common</TraitRarityCommon>
+	<TraitRarityLowerTierLabel>&lt;&lt;&lt; Lower Tier</TraitRarityLowerTierLabel>
+	<TraitRarityLowerHigherLabel>Higher Tier &gt;&gt;&gt;</TraitRarityLowerHigherLabel>
+	<TraitRarityResetButtonLabel>Reset to default</TraitRarityResetButtonLabel>
+	
+	<!-- Color Change Window -->
+	<TraitRarityChangeColorLabel>Changing the color for:</TraitRarityChangeColorLabel>
+	<TraitRarityResetColorLabel>Reset to default color</TraitRarityResetColorLabel>
+	
+	<!-- Overlay -->
+	<ShowTraitRarityOverlayToggleButton>Toggle the trait display.\n\nShow the traits of pawns directly under them.</ShowTraitRarityOverlayToggleButton>
+	<TraitRarityNoPawnSelected>No pawn</TraitRarityNoPawnSelected>
+</LanguageData>

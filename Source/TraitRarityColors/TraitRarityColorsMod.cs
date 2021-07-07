@@ -16,14 +16,14 @@ namespace TraitRarityColors
         {
             Listing_Standard listingStandard = new Listing_Standard();
             listingStandard.Begin(inRect);
-            listingStandard.Label("Changing anything needs a restart of the game to be applied!");
+            listingStandard.Label("TraitRarityWarningLabel".Translate(), -1f, "TraitRarityWarningDescription".Translate());
 
             listingStandard.Gap(10f);
-            listingStandard.CheckboxLabeled("Use custom trait tiers", ref traitRarityColorsModSettings.useCustomTraitTiers, "If enabled for teh first time, the default tier for each trait is its current rarity");
+            listingStandard.CheckboxLabeled("TraitRarityCustomTierLabel".Translate(), ref traitRarityColorsModSettings.useCustomTraitTiers, "TraitRarityCustomTierDescription".Translate());
             if (traitRarityColorsModSettings.useCustomTraitTiers)
             {
                 listingStandard.Gap(10f);
-                if (listingStandard.ButtonText("Configure custom trait tiers..."))
+                if (listingStandard.ButtonText("TraitRarityCustomTierConfigurationLabel".Translate()))
                 {
                     Find.WindowStack.Add(new TraitRarityColorCustomTierWindow());
                 }
@@ -31,7 +31,7 @@ namespace TraitRarityColors
             if (!traitRarityColorsModSettings.useCustomTraitTiers)
             {
                 listingStandard.Gap(2f);
-                listingStandard.CheckboxLabeled("Overwrite trait colors from other mods", ref traitRarityColorsModSettings.ignoreCustomTraitColors, "Not compatible with the custom trait tier option");
+                listingStandard.CheckboxLabeled("TraitRarityOverwriteLabel".Translate(), ref traitRarityColorsModSettings.ignoreCustomTraitColors, "TraitRarityCustomTierConfigurationDescription".Translate());
             }
             else
             {
@@ -40,7 +40,7 @@ namespace TraitRarityColors
 
             // Mystic
             listingStandard.Gap(10f);
-            if (listingStandard.ButtonTextLabeled(traitRarityColorsModSettings.colorMystic + "Mystic traits:</color> " + TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorMystic), "Change mystic color"))
+            if (listingStandard.ButtonTextLabeled(string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorMystic, "TraitRarityCountMystic".Translate(), TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorMystic)), "TraitRarityChangeColorMystic".Translate()))
             {
                 Find.WindowStack.Add(new TraitRarityColorChangeWindow("mystic", traitRarityColorsModSettings.colorMystic, "<color=#FF0000>"));
             }
@@ -48,12 +48,12 @@ namespace TraitRarityColors
             {
                 listingStandard.Gap(5f);
                 Rect rectMystic = listingStandard.GetRect(22f);
-                traitRarityColorsModSettings.maxLimitMystic = Widgets.HorizontalSlider(rectMystic, traitRarityColorsModSettings.maxLimitMystic, 0f, 3f, false, traitRarityColorsModSettings.colorMystic + "Max commonality:</color> " + (traitRarityColorsModSettings.maxLimitMystic).ToString(), "0", "3", 0.1f);
+                traitRarityColorsModSettings.maxLimitMystic = Widgets.HorizontalSlider(rectMystic, traitRarityColorsModSettings.maxLimitMystic, 0f, 3f, false, string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorMystic, "TraitRarityMaxMommonality".Translate(), traitRarityColorsModSettings.maxLimitMystic.ToString()), "0", "3", 0.1f);
             }
 
             // Legendary
             listingStandard.Gap(10f);
-            if (listingStandard.ButtonTextLabeled(traitRarityColorsModSettings.colorLegendary + "Legendary traits:</color> " + TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorLegendary), "Change legendary color"))
+            if (listingStandard.ButtonTextLabeled(string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorLegendary , "TraitRarityCountLegendary".Translate(), TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorLegendary)), "TraitRarityChangeColorLegendary".Translate()))
             {
                 Find.WindowStack.Add(new TraitRarityColorChangeWindow("legendary", traitRarityColorsModSettings.colorLegendary, "<color=#FF9900>"));
             }
@@ -61,11 +61,11 @@ namespace TraitRarityColors
             {
                 listingStandard.Gap(5f);
                 Rect rectLegendary = listingStandard.GetRect(22f);
-                traitRarityColorsModSettings.maxLimitLegendary = Widgets.HorizontalSlider(rectLegendary, traitRarityColorsModSettings.maxLimitLegendary, 0f, 3f, false, traitRarityColorsModSettings.colorLegendary + "Max commonality:</color> " + (traitRarityColorsModSettings.maxLimitLegendary).ToString(), "0", "3", 0.1f);
+                traitRarityColorsModSettings.maxLimitLegendary = Widgets.HorizontalSlider(rectLegendary, traitRarityColorsModSettings.maxLimitLegendary, 0f, 3f, false, string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorLegendary, "TraitRarityMaxMommonality".Translate(), traitRarityColorsModSettings.maxLimitLegendary.ToString()), "0", "3", 0.1f);
             }
             // Epic
             listingStandard.Gap(10f);
-            if (listingStandard.ButtonTextLabeled(traitRarityColorsModSettings.colorEpic +"Epic traits:</color> " + TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorEpic), "Change epic color"))
+            if (listingStandard.ButtonTextLabeled(string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorEpic, "TraitRarityCountEpic".Translate(), TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorEpic)), "TraitRarityChangeColorEpic".Translate()))
             {
                 Find.WindowStack.Add(new TraitRarityColorChangeWindow("epic", traitRarityColorsModSettings.colorEpic, "<color=#cc0099>"));
             }
@@ -73,11 +73,11 @@ namespace TraitRarityColors
             {
                 listingStandard.Gap(5f);
                 Rect rectEpic = listingStandard.GetRect(22f);
-                traitRarityColorsModSettings.maxLimitEpic = Widgets.HorizontalSlider(rectEpic, traitRarityColorsModSettings.maxLimitEpic, 0f, 3f, false, traitRarityColorsModSettings.colorEpic + "Max commonality:</color> " + (traitRarityColorsModSettings.maxLimitEpic).ToString(), "0", "3", 0.1f);
+                traitRarityColorsModSettings.maxLimitEpic = Widgets.HorizontalSlider(rectEpic, traitRarityColorsModSettings.maxLimitEpic, 0f, 3f, false, string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorEpic, "TraitRarityMaxMommonality".Translate(), traitRarityColorsModSettings.maxLimitEpic.ToString()), "0", "3", 0.1f);
             }
             // Rare
             listingStandard.Gap(10f);
-            if (listingStandard.ButtonTextLabeled(traitRarityColorsModSettings.colorRare + "Rare traits:</color> " + TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorRare), "Change rare color"))
+            if (listingStandard.ButtonTextLabeled(string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorRare, "TraitRarityCountRare".Translate(), TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorRare)), "TraitRarityChangeColorRare".Translate()))
             {
                 Find.WindowStack.Add(new TraitRarityColorChangeWindow("rare", traitRarityColorsModSettings.colorRare, "<color=#0073e6>"));
             }
@@ -85,11 +85,11 @@ namespace TraitRarityColors
             {            
                 listingStandard.Gap(5f);
                 Rect rectRare = listingStandard.GetRect(22f);
-                traitRarityColorsModSettings.maxLimitRare = Widgets.HorizontalSlider(rectRare, traitRarityColorsModSettings.maxLimitRare, 0f, 3f, false, traitRarityColorsModSettings.colorRare + "Max commonality:</color> " + (traitRarityColorsModSettings.maxLimitRare).ToString(), "0", "3", 0.1f);
+                traitRarityColorsModSettings.maxLimitRare = Widgets.HorizontalSlider(rectRare, traitRarityColorsModSettings.maxLimitRare, 0f, 3f, false, string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorRare, "TraitRarityMaxMommonality".Translate(), traitRarityColorsModSettings.maxLimitRare.ToString()), "0", "3", 0.1f);
             }
             // Uncommon
             listingStandard.Gap(10f);
-            if (listingStandard.ButtonTextLabeled(traitRarityColorsModSettings.colorUncommon + "Uncommon traits:</color> " + TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorUncommon), "Change uncommon color"))
+            if (listingStandard.ButtonTextLabeled(string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorUncommon, "TraitRarityCountUncommon".Translate(), TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorUncommon)), "TraitRarityChangeColorUncommon".Translate()))
             {
                 Find.WindowStack.Add(new TraitRarityColorChangeWindow("uncommon", traitRarityColorsModSettings.colorUncommon, "<color=#00ff00>"));
             }
@@ -97,11 +97,11 @@ namespace TraitRarityColors
             {            
                 listingStandard.Gap(5f);
                 Rect rectUncommon = listingStandard.GetRect(22f);
-                traitRarityColorsModSettings.maxLimitUncommon = Widgets.HorizontalSlider(rectUncommon, traitRarityColorsModSettings.maxLimitUncommon, 0f, 3f, false, traitRarityColorsModSettings.colorUncommon + "Max commonality:</color> " + (traitRarityColorsModSettings.maxLimitUncommon).ToString(), "0", "3", 0.1f);
+                traitRarityColorsModSettings.maxLimitUncommon = Widgets.HorizontalSlider(rectUncommon, traitRarityColorsModSettings.maxLimitUncommon, 0f, 3f, false, string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorUncommon, "TraitRarityMaxMommonality".Translate(), traitRarityColorsModSettings.maxLimitUncommon.ToString()), "0", "3", 0.1f);
             }
             // Common
             listingStandard.Gap(10f);
-            if (listingStandard.ButtonTextLabeled(traitRarityColorsModSettings.colorCommon + "Common traits:</color> " + TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorCommon), "Change common color"))
+            if (listingStandard.ButtonTextLabeled(string.Format("{0}{1}</color>: {2}", traitRarityColorsModSettings.colorCommon, "TraitRarityCountCommon".Translate(), TraitRarityColors.GetCountForColor(traitRarityColorsModSettings.colorCommon)), "TraitRarityChangeColorCommon".Translate()))
             {
                 Find.WindowStack.Add(new TraitRarityColorChangeWindow("common", traitRarityColorsModSettings.colorCommon, "<color=#FFFFFF>"));
             }
@@ -109,7 +109,7 @@ namespace TraitRarityColors
             if (!traitRarityColorsModSettings.useCustomTraitTiers)
             {
                 listingStandard.Gap(20);
-                if (listingStandard.ButtonText("Reset limits to default"))
+                if (listingStandard.ButtonText("TraitRarityResetLimitsLabel".Translate()))
                 {
                     traitRarityColorsModSettings.maxLimitMystic = 0.1f;
                     traitRarityColorsModSettings.maxLimitLegendary = 0.5f;
@@ -120,7 +120,7 @@ namespace TraitRarityColors
             }
             
             listingStandard.Gap(10f);
-            if (listingStandard.ButtonText("Reset colors to default"))
+            if (listingStandard.ButtonText("TraitRarityResetColorsLabel".Translate()))
             {
                 traitRarityColorsModSettings.colorMystic = "<color=#FF0000>";
                 traitRarityColorsModSettings.colorLegendary = "<color=#FF9900>";
