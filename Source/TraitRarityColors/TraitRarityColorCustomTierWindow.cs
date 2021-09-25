@@ -2,6 +2,8 @@
 using Verse;
 using RimWorld;
 using System.Collections.Generic;
+using System.Text;
+using System.Linq;
 
 namespace TraitRarityColors
 {
@@ -18,8 +20,8 @@ namespace TraitRarityColors
         private Vector2 scrollPosition = Vector2.zero;
         public TraitRarityColorCustomTierWindow()
         {
-
-        }
+            
+		}
 
         public override void DoWindowContents(Rect inRect)
         {
@@ -73,7 +75,7 @@ namespace TraitRarityColors
                     Text.Anchor = TextAnchor.MiddleCenter;
                     Widgets.Label(labelRect, traitDegreeData.label);
                     Text.Anchor = TextAnchor.UpperLeft;
-                    TooltipHandler.TipRegion(labelRect, traitDegreeData.description);
+                    TooltipHandler.TipRegion(labelRect, TipString(traitDef, traitDegreeData));
                     Rect buttonRect = traitRect.RightHalf();
                     if (Widgets.ButtonText(traitRect.LeftHalf().LeftHalf(), "TraitRarityLowerTierLabel".Translate())) TraitRarityColors.LowerTierFor(traitDegreeData.label);
                     if (Widgets.ButtonText(traitRect.RightHalf().RightHalf(), "TraitRarityLowerHigherLabel".Translate())) TraitRarityColors.IncreaseTierFor(traitDegreeData.label);
@@ -98,5 +100,120 @@ namespace TraitRarityColors
                 LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().traitTiers = new Dictionary<string, int>();
             }
         }
-    }
+
+        public string TipString(TraitDef traitDef, TraitDegreeData traitDegreeData)
+        {
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.AppendLine(traitDegreeData.description);
+			bool flag = traitDegreeData.skillGains.Count > 0;
+			bool flag2 = GetPermaThoughts(traitDef, traitDegreeData).Any<ThoughtDef>();
+			bool flag3 = traitDegreeData.statOffsets != null;
+			bool flag4 = traitDegreeData.statFactors != null;
+			if (flag || flag2 || flag3 || flag4)
+			{
+				stringBuilder.AppendLine();
+			}
+			if (flag)
+			{
+				foreach (KeyValuePair<SkillDef, int> keyValuePair in traitDegreeData.skillGains)
+				{
+					if (keyValuePair.Value != 0)
+					{
+						string value = "    " + keyValuePair.Key.skillLabel.CapitalizeFirst() + ":   " + keyValuePair.Value.ToString("+##;-##");
+						stringBuilder.AppendLine(value);
+					}
+				}
+			}
+			if (flag2)
+			{
+				foreach (ThoughtDef thoughtDef in GetPermaThoughts(traitDef, traitDegreeData))
+				{
+					stringBuilder.AppendLine("    " + "PermanentMoodEffect".Translate() + " " + thoughtDef.stages[0].baseMoodEffect.ToStringByStyle(ToStringStyle.Integer, ToStringNumberSense.Offset));
+				}
+			}
+			if (flag3)
+			{
+				for (int i = 0; i < traitDegreeData.statOffsets.Count; i++)
+				{
+					StatModifier statModifier = traitDegreeData.statOffsets[i];
+					string valueToStringAsOffset = statModifier.ValueToStringAsOffset;
+					string value2 = "    " + statModifier.stat.LabelCap + " " + valueToStringAsOffset;
+					stringBuilder.AppendLine(value2);
+				}
+			}
+			if (flag4)
+			{
+				for (int j = 0; j < traitDegreeData.statFactors.Count; j++)
+				{
+					StatModifier statModifier2 = traitDegreeData.statFactors[j];
+					string toStringAsFactor = statModifier2.ToStringAsFactor;
+					string value3 = "    " + statModifier2.stat.LabelCap + " " + toStringAsFactor;
+					stringBuilder.AppendLine(value3);
+				}
+			}
+			if (traitDegreeData.hungerRateFactor != 1f)
+			{
+				string t = traitDegreeData.hungerRateFactor.ToStringByStyle(ToStringStyle.PercentOne, ToStringNumberSense.Factor);
+				string value4 = "    " + "HungerRate".Translate() + " " + t;
+				stringBuilder.AppendLine(value4);
+			}
+			if (ModsConfig.RoyaltyActive)
+			{
+				List<MeditationFocusDef> allowedMeditationFocusTypes = traitDegreeData.allowedMeditationFocusTypes;
+				if (!allowedMeditationFocusTypes.NullOrEmpty<MeditationFocusDef>())
+				{
+					stringBuilder.AppendLine();
+					stringBuilder.AppendLine("EnablesMeditationFocusType".Translate().Colorize(ColoredText.TipSectionTitleColor) + ":\n" + (from f in allowedMeditationFocusTypes select f.LabelCap.Resolve()).ToLineList("  - ", false));
+				}
+			}
+			if (ModsConfig.IdeologyActive)
+			{
+				List<IssueDef> affectedIssues = traitDegreeData.GetAffectedIssues(traitDef);
+				if (affectedIssues.Count != 0)
+				{
+					stringBuilder.AppendLine();
+					stringBuilder.AppendLine("OverridesSomePrecepts".Translate().Colorize(ColoredText.TipSectionTitleColor) + ":\n" + (from x in affectedIssues select x.LabelCap.Resolve()).ToLineList("  - ", false));
+				}
+				List<MemeDef> affectedMemes = traitDegreeData.GetAffectedMemes(traitDef, true);
+				if (affectedMemes.Count > 0)
+				{
+					stringBuilder.AppendLine();
+					stringBuilder.AppendLine("AgreeableMemes".Translate().Colorize(ColoredText.TipSectionTitleColor) + ":\n" + (from x in affectedMemes select x.LabelCap.Resolve()).ToLineList("  - ", false));
+				}
+				List<MemeDef> affectedMemes2 = traitDegreeData.GetAffectedMemes(traitDef, false);
+				if (affectedMemes2.Count > 0)
+				{
+					stringBuilder.AppendLine();
+					stringBuilder.AppendLine("DisagreeableMemes".Translate().Colorize(ColoredText.TipSectionTitleColor) + ":\n" + (from x in affectedMemes2 select x.LabelCap.Resolve()).ToLineList("  - ", false));
+				}
+			}
+			if (stringBuilder.Length > 0 && stringBuilder[stringBuilder.Length - 1] == '\n')
+			{
+				if (stringBuilder.Length > 1 && stringBuilder[stringBuilder.Length - 2] == '\r')
+				{
+					stringBuilder.Remove(stringBuilder.Length - 2, 2);
+				}
+				else
+				{
+					stringBuilder.Remove(stringBuilder.Length - 1, 1);
+				}
+			}
+			return stringBuilder.ToString();
+		}
+
+		private IEnumerable<ThoughtDef> GetPermaThoughts(TraitDef traitDef, TraitDegreeData traitDegreeData)
+		{
+			List<ThoughtDef> allThoughts = DefDatabase<ThoughtDef>.AllDefsListForReading;
+			int num;
+			for (int i = 0; i < allThoughts.Count; i = num + 1)
+			{
+				if (allThoughts[i].IsSituational && allThoughts[i].Worker is ThoughtWorker_AlwaysActive && allThoughts[i].requiredTraits != null && allThoughts[i].requiredTraits.Contains(traitDef) && (!allThoughts[i].RequiresSpecificTraitsDegree || allThoughts[i].requiredTraitsDegree == traitDegreeData.degree))
+				{
+					yield return allThoughts[i];
+				}
+				num = i;
+			}
+			yield break;
+		}
+	}
 }
