@@ -18,6 +18,7 @@ namespace TraitRarityColors
         }
         protected Vector2 WindowSize = new Vector2(600f, 800f); // Border Size is 18
         private Vector2 scrollPosition = Vector2.zero;
+		private Dictionary<string, string> tipStrings = new Dictionary<string, string>();
         public TraitRarityColorCustomTierWindow()
         {
             
@@ -103,6 +104,8 @@ namespace TraitRarityColors
 
         public string TipString(TraitDef traitDef, TraitDegreeData traitDegreeData)
         {
+			string traitKey = traitDef.defName + "_" + traitDegreeData.degree.ToString();
+			if (tipStrings.ContainsKey(traitKey)) return tipStrings[traitKey];
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.AppendLine(traitDegreeData.description);
 			bool flag = traitDegreeData.skillGains.Count > 0;
@@ -198,7 +201,9 @@ namespace TraitRarityColors
 					stringBuilder.Remove(stringBuilder.Length - 1, 1);
 				}
 			}
-			return stringBuilder.ToString();
+			string tipString = stringBuilder.ToString();
+			tipStrings.Add(traitKey, tipString);
+			return tipString;
 		}
 
 		private IEnumerable<ThoughtDef> GetPermaThoughts(TraitDef traitDef, TraitDegreeData traitDegreeData)
