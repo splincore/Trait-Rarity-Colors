@@ -9,6 +9,7 @@ namespace TraitRarityColors
     [StaticConstructorOnStartup]
     internal static class TraitRarityColors
     {
+        private static List<TraitDef> traitDefs = new List<TraitDef>();
         static TraitRarityColors()
         {
             HashSet<string> traitsToIgnore = new HashSet<string>();
@@ -23,13 +24,18 @@ namespace TraitRarityColors
                 }
             }
             LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().traitsToIgnore = traitsToIgnore;
+            RefreshTraitDefs();
+        }
+
+        public static void RefreshTraitDefs()
+        {
+            traitDefs = DefDatabase<TraitDef>.AllDefsListForReading;
             RefreshColors();
         }
 
         public static int GetCountForColor(string color)
         {
-            RefreshColors();
-            return DefDatabase<TraitDef>.AllDefsListForReading.SelectMany(t => t.degreeDatas).Where(d => d.label.Contains(color)).Count();
+            return traitDefs.SelectMany(t => t.degreeDatas).Where(d => d.label.Contains(color)).Count();
         }
 
         public static void IncreaseTierFor(string traitLabel)
@@ -38,6 +44,7 @@ namespace TraitRarityColors
             string cleanLabel = traitLabel.Remove(0, 15).Replace("</color>", "");
             traitTiers[cleanLabel] = Math.Max(traitTiers[cleanLabel] - 1, 1);
             LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().traitTiers = traitTiers;
+            RefreshTraitDefs();
         }
 
         public static void LowerTierFor(string traitLabel)
@@ -46,6 +53,7 @@ namespace TraitRarityColors
             string cleanLabel = traitLabel.Remove(0, 15).Replace("</color>", "");
             traitTiers[cleanLabel] = Math.Min(traitTiers[cleanLabel] + 1, 6);
             LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().traitTiers = traitTiers;
+            RefreshTraitDefs();
         }
 
         private static void RefreshColors()

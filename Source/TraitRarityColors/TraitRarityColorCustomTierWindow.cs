@@ -19,10 +19,36 @@ namespace TraitRarityColors
         protected Vector2 WindowSize = new Vector2(600f, 800f); // Border Size is 18
         private Vector2 scrollPosition = Vector2.zero;
 		private Dictionary<string, string> tipStrings = new Dictionary<string, string>();
-        public TraitRarityColorCustomTierWindow()
-        {
-            
-		}
+		private List<KeyValuePair<TraitDegreeData, TraitDef>> allTraits = new List<KeyValuePair<TraitDegreeData, TraitDef>>();
+		public TraitRarityColorCustomTierWindow()
+		{
+			RefreshAllTraits();
+        }
+
+		public void RefreshAllTraits()
+		{
+            allTraits = new List<KeyValuePair<TraitDegreeData, TraitDef>>();
+            foreach (TraitDef traitDef in DefDatabase<TraitDef>.AllDefsListForReading)
+            {
+                foreach (TraitDegreeData traitDegreeData in traitDef.degreeDatas)
+                {
+                    allTraits.Add(new KeyValuePair<TraitDegreeData, TraitDef>(traitDegreeData, traitDef));
+                }
+            }
+            allTraits.SortBy(o => o.Key.label.Substring(15));
+			Log.Warning(allTraits.First().Key.label);
+			Log.Warning(allTraits.Last().Key.label);
+        }
+
+		public void LowerTierFor(string traitLabel)
+		{
+            TraitRarityColors.LowerTierFor(traitLabel);
+        }
+
+		public void IncreaseTierFor(string traitLabel)
+		{
+            TraitRarityColors.IncreaseTierFor(traitLabel);
+        }
 
         public override void DoWindowContents(Rect inRect)
         {
@@ -53,35 +79,39 @@ namespace TraitRarityColors
             rect.height -= 56; // 48 distance from top with labels and line with 4 above/below
             rect.height -= 49f; // distance from bottom with buttons
 
-            float viewRectHeight = 0;
-            foreach (TraitDef traitDef in DefDatabase<TraitDef>.AllDefsListForReading)
-            {
-                foreach (TraitDegreeData traitDegreeData in traitDef.degreeDatas)
-                {
-                    viewRectHeight += 30; // height per trait option
-                }
-            }
+            float viewRectHeight = allTraits.Count() * 30;
             Rect viewRect = rect.AtZero();
             viewRect.height = viewRectHeight;
             viewRect.width -= GUI.skin.verticalScrollbar.fixedWidth;
             viewRect.width -= GUI.skin.verticalScrollbar.margin.left;
             scrollPosition = GUI.BeginScrollView(rect, scrollPosition, viewRect, false, true);
             int currentY = 0;
-            foreach (TraitDef traitDef in DefDatabase<TraitDef>.AllDefsListForReading)
-            {
-                foreach (TraitDegreeData traitDegreeData in traitDef.degreeDatas)
-                {
-                    Rect traitRect = new Rect(0, currentY, viewRect.width, 30);
-                    Rect labelRect = new Rect(traitRect.width / 4, currentY, traitRect.width / 2, 30);
-                    Text.Anchor = TextAnchor.MiddleCenter;
-                    Widgets.Label(labelRect, traitDegreeData.label);
-                    Text.Anchor = TextAnchor.UpperLeft;
-                    TooltipHandler.TipRegion(labelRect, TipString(traitDef, traitDegreeData));
-                    Rect buttonRect = traitRect.RightHalf();
-                    if (Widgets.ButtonText(traitRect.LeftHalf().LeftHalf(), "TraitRarityLowerTierLabel".Translate())) TraitRarityColors.LowerTierFor(traitDegreeData.label);
-                    if (Widgets.ButtonText(traitRect.RightHalf().RightHalf(), "TraitRarityLowerHigherLabel".Translate())) TraitRarityColors.IncreaseTierFor(traitDegreeData.label);
-                    currentY += 30;
+			bool traitsModified = false;
+			foreach(KeyValuePair<TraitDegreeData, TraitDef> trait in allTraits)
+			{
+                Rect traitRect = new Rect(0, currentY, viewRect.width, 30);
+                Rect labelRect = new Rect(traitRect.width / 4, currentY, traitRect.width / 2, 30);
+                Text.Anchor = TextAnchor.MiddleCenter;
+                Widgets.Label(labelRect, trait.Key.label);
+                Text.Anchor = TextAnchor.UpperLeft;
+                TooltipHandler.TipRegion(labelRect, TipString(trait.Value, trait.Key));
+                Rect buttonRect = traitRect.RightHalf();
+				if (Widgets.ButtonText(traitRect.LeftHalf().LeftHalf(), "TraitRarityLowerTierLabel".Translate()))
+				{
+					LowerTierFor(trait.Key.label);
+					traitsModified = true;
+
                 }
+				if (Widgets.ButtonText(traitRect.RightHalf().RightHalf(), "TraitRarityLowerHigherLabel".Translate()))
+				{
+					IncreaseTierFor(trait.Key.label);
+                    traitsModified = true;
+                }
+				currentY += 30;
+            }
+			if (traitsModified)
+			{
+                RefreshAllTraits();
             }
             GUI.EndScrollView();
             Vector2 buttonSize = new Vector2(120f, 40f);
@@ -99,6 +129,8 @@ namespace TraitRarityColors
             if (Widgets.ButtonText(rectReset, "TraitRarityResetButtonLabel".Translate()))
             {
                 LoadedModManager.GetMod<TraitRarityColorsMod>().GetSettings<TraitRarityColorsModSettings>().traitTiers = new Dictionary<string, int>();
+				TraitRarityColors.RefreshTraitDefs();
+				RefreshAllTraits();
             }
         }
 

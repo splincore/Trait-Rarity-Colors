@@ -94,7 +94,7 @@ namespace TraitRarityColors
                     default:
                         break;
                 }
-
+                TraitRarityColors.RefreshTraitDefs();
                 this.Close(true);
                 Event.current.Use();
             }
