@@ -18,8 +18,7 @@ namespace TraitRarityColors
         }
         protected Vector2 WindowSize = new Vector2(600f, 800f); // Border Size is 18
         private Vector2 scrollPosition = Vector2.zero;
-		private Dictionary<string, string> tipStrings = new Dictionary<string, string>();
-		private List<KeyValuePair<TraitDegreeData, TraitDef>> allTraits = new List<KeyValuePair<TraitDegreeData, TraitDef>>();
+		private List<TraitDegreeData> allTraits = new List<TraitDegreeData>();
 		public TraitRarityColorCustomTierWindow()
 		{
 			RefreshAllTraits();
@@ -27,17 +26,15 @@ namespace TraitRarityColors
 
 		public void RefreshAllTraits()
 		{
-            allTraits = new List<KeyValuePair<TraitDegreeData, TraitDef>>();
+            allTraits = new List<TraitDegreeData>();
             foreach (TraitDef traitDef in DefDatabase<TraitDef>.AllDefsListForReading)
             {
                 foreach (TraitDegreeData traitDegreeData in traitDef.degreeDatas)
                 {
-                    allTraits.Add(new KeyValuePair<TraitDegreeData, TraitDef>(traitDegreeData, traitDef));
+                    allTraits.Add(traitDegreeData);
                 }
             }
-            allTraits.SortBy(o => o.Key.label.Substring(15));
-			Log.Warning(allTraits.First().Key.label);
-			Log.Warning(allTraits.Last().Key.label);
+            allTraits.SortBy(o => o.label.Substring(15));
         }
 
 		public void LowerTierFor(string traitLabel)
@@ -87,24 +84,24 @@ namespace TraitRarityColors
             scrollPosition = GUI.BeginScrollView(rect, scrollPosition, viewRect, false, true);
             int currentY = 0;
 			bool traitsModified = false;
-			foreach(KeyValuePair<TraitDegreeData, TraitDef> trait in allTraits)
+			foreach(TraitDegreeData trait in allTraits)
 			{
                 Rect traitRect = new Rect(0, currentY, viewRect.width, 30);
                 Rect labelRect = new Rect(traitRect.width / 4, currentY, traitRect.width / 2, 30);
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(labelRect, trait.Key.label);
+                Widgets.Label(labelRect, trait.label);
                 Text.Anchor = TextAnchor.UpperLeft;
-                TooltipHandler.TipRegion(labelRect, TipString(trait.Value, trait.Key));
+                TooltipHandler.TipRegion(labelRect, TipString(trait));
                 Rect buttonRect = traitRect.RightHalf();
 				if (Widgets.ButtonText(traitRect.LeftHalf().LeftHalf(), "TraitRarityLowerTierLabel".Translate()))
 				{
-					LowerTierFor(trait.Key.label);
+					LowerTierFor(trait.label);
 					traitsModified = true;
 
                 }
 				if (Widgets.ButtonText(traitRect.RightHalf().RightHalf(), "TraitRarityLowerHigherLabel".Translate()))
 				{
-					IncreaseTierFor(trait.Key.label);
+					IncreaseTierFor(trait.label);
                     traitsModified = true;
                 }
 				currentY += 30;
@@ -134,123 +131,9 @@ namespace TraitRarityColors
             }
         }
 
-        public string TipString(TraitDef traitDef, TraitDegreeData traitDegreeData)
+        public string TipString(TraitDegreeData traitDegreeData)
         {
-			string traitKey = traitDef.defName + "_" + traitDegreeData.degree.ToString();
-			if (tipStrings.ContainsKey(traitKey)) return tipStrings[traitKey];
-			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.AppendLine(traitDegreeData.description);
-			bool flag = traitDegreeData.skillGains.Count > 0;
-			bool flag2 = GetPermaThoughts(traitDef, traitDegreeData).Any<ThoughtDef>();
-			bool flag3 = traitDegreeData.statOffsets != null;
-			bool flag4 = traitDegreeData.statFactors != null;
-			if (flag || flag2 || flag3 || flag4)
-			{
-				stringBuilder.AppendLine();
-			}
-			if (flag)
-			{
-				foreach (KeyValuePair<SkillDef, int> keyValuePair in traitDegreeData.skillGains)
-				{
-					if (keyValuePair.Value != 0)
-					{
-						string value = "    " + keyValuePair.Key.skillLabel.CapitalizeFirst() + ":   " + keyValuePair.Value.ToString("+##;-##");
-						stringBuilder.AppendLine(value);
-					}
-				}
-			}
-			if (flag2)
-			{
-				foreach (ThoughtDef thoughtDef in GetPermaThoughts(traitDef, traitDegreeData))
-				{
-					stringBuilder.AppendLine("    " + "PermanentMoodEffect".Translate() + " " + thoughtDef.stages[0].baseMoodEffect.ToStringByStyle(ToStringStyle.Integer, ToStringNumberSense.Offset));
-				}
-			}
-			if (flag3)
-			{
-				for (int i = 0; i < traitDegreeData.statOffsets.Count; i++)
-				{
-					StatModifier statModifier = traitDegreeData.statOffsets[i];
-					string valueToStringAsOffset = statModifier.ValueToStringAsOffset;
-					string value2 = "    " + statModifier.stat.LabelCap + " " + valueToStringAsOffset;
-					stringBuilder.AppendLine(value2);
-				}
-			}
-			if (flag4)
-			{
-				for (int j = 0; j < traitDegreeData.statFactors.Count; j++)
-				{
-					StatModifier statModifier2 = traitDegreeData.statFactors[j];
-					string toStringAsFactor = statModifier2.ToStringAsFactor;
-					string value3 = "    " + statModifier2.stat.LabelCap + " " + toStringAsFactor;
-					stringBuilder.AppendLine(value3);
-				}
-			}
-			if (traitDegreeData.hungerRateFactor != 1f)
-			{
-				string t = traitDegreeData.hungerRateFactor.ToStringByStyle(ToStringStyle.PercentOne, ToStringNumberSense.Factor);
-				string value4 = "    " + "HungerRate".Translate() + " " + t;
-				stringBuilder.AppendLine(value4);
-			}
-			if (ModsConfig.RoyaltyActive)
-			{
-				List<MeditationFocusDef> allowedMeditationFocusTypes = traitDegreeData.allowedMeditationFocusTypes;
-				if (!allowedMeditationFocusTypes.NullOrEmpty<MeditationFocusDef>())
-				{
-					stringBuilder.AppendLine();
-					stringBuilder.AppendLine("EnablesMeditationFocusType".Translate().Colorize(ColoredText.TipSectionTitleColor) + ":\n" + (from f in allowedMeditationFocusTypes select f.LabelCap.Resolve()).ToLineList("  - ", false));
-				}
-			}
-			if (ModsConfig.IdeologyActive)
-			{
-				List<IssueDef> affectedIssues = traitDegreeData.GetAffectedIssues(traitDef);
-				if (affectedIssues.Count != 0)
-				{
-					stringBuilder.AppendLine();
-					stringBuilder.AppendLine("OverridesSomePrecepts".Translate().Colorize(ColoredText.TipSectionTitleColor) + ":\n" + (from x in affectedIssues select x.LabelCap.Resolve()).ToLineList("  - ", false));
-				}
-				List<MemeDef> affectedMemes = traitDegreeData.GetAffectedMemes(traitDef, true);
-				if (affectedMemes.Count > 0)
-				{
-					stringBuilder.AppendLine();
-					stringBuilder.AppendLine("AgreeableMemes".Translate().Colorize(ColoredText.TipSectionTitleColor) + ":\n" + (from x in affectedMemes select x.LabelCap.Resolve()).ToLineList("  - ", false));
-				}
-				List<MemeDef> affectedMemes2 = traitDegreeData.GetAffectedMemes(traitDef, false);
-				if (affectedMemes2.Count > 0)
-				{
-					stringBuilder.AppendLine();
-					stringBuilder.AppendLine("DisagreeableMemes".Translate().Colorize(ColoredText.TipSectionTitleColor) + ":\n" + (from x in affectedMemes2 select x.LabelCap.Resolve()).ToLineList("  - ", false));
-				}
-			}
-			if (stringBuilder.Length > 0 && stringBuilder[stringBuilder.Length - 1] == '\n')
-			{
-				if (stringBuilder.Length > 1 && stringBuilder[stringBuilder.Length - 2] == '\r')
-				{
-					stringBuilder.Remove(stringBuilder.Length - 2, 2);
-				}
-				else
-				{
-					stringBuilder.Remove(stringBuilder.Length - 1, 1);
-				}
-			}
-			string tipString = stringBuilder.ToString();
-			tipStrings.Add(traitKey, tipString);
-			return tipString;
-		}
-
-		private IEnumerable<ThoughtDef> GetPermaThoughts(TraitDef traitDef, TraitDegreeData traitDegreeData)
-		{
-			List<ThoughtDef> allThoughts = DefDatabase<ThoughtDef>.AllDefsListForReading;
-			int num;
-			for (int i = 0; i < allThoughts.Count; i = num + 1)
-			{
-				if (allThoughts[i].IsSituational && allThoughts[i].Worker is ThoughtWorker_AlwaysActive && allThoughts[i].requiredTraits != null && allThoughts[i].requiredTraits.Contains(traitDef) && (!allThoughts[i].RequiresSpecificTraitsDegree || allThoughts[i].requiredTraitsDegree == traitDegreeData.degree))
-				{
-					yield return allThoughts[i];
-				}
-				num = i;
-			}
-			yield break;
+			return traitDegreeData.description;
 		}
 	}
 }
