@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- Mod Options -->
+	<TraitRarityWarningLabel>Zmiany najprawdopodobniej będą wymagały ponownego uruchomienia!</TraitRarityWarningLabel>
+	<TraitRarityWarningDescription>Jeśli w bieżącej sesji nie załadowano żadnej gry (lub nie utworzono kolonii), restart nie jest wymagany. Rimworld ładuje wszystkie nazwy cech do pamięci podręcznej zaraz po załadowaniu gry (lub utworzeniu kolonii).</TraitRarityWarningDescription>
+	<TraitRarityCustomTierLabel>Używaj niestandardowych rang cech.</TraitRarityCustomTierLabel>
+	<TraitRarityCustomTierDescription>Przy pierwszej aktywacji wszystkie cechy są sortowane zgodnie z wcześniej ustawioną częstotliwością.</TraitRarityCustomTierDescription>
+	<TraitRarityCustomTierConfigurationLabel>Edycja rang cech zdefiniowanych przez użytkownika...</TraitRarityCustomTierConfigurationLabel>
+	<TraitRarityOverwriteLabel>Nadpisywanie kolorów cech innych modów</TraitRarityOverwriteLabel>
+	<TraitRarityCustomTierConfigurationDescription>Jeśli inne mody mają własne kolory cech, nie są one zmieniane. Jeśli ustawienie rangi cechy zdefiniowanej przez użytkownika jest aktywne, kolory innych modów są zawsze nadpisywane.</TraitRarityCustomTierConfigurationDescription>
+	
+	<TraitRarityMaxMommonality>Maksymalna częstotliwość</TraitRarityMaxMommonality>
+	
+	<TraitRarityCountMystic>Mistyczne cechy</TraitRarityCountMystic>
+	<TraitRarityChangeColorMystic>Zmień kolor mistycznych...</TraitRarityChangeColorMystic>
+	<TraitRarityCountLegendary>Legendarne cechy</TraitRarityCountLegendary>
+	<TraitRarityChangeColorLegendary>Zmień kolor legendarnych...</TraitRarityChangeColorLegendary>
+	<TraitRarityCountEpic>Epicka cecha</TraitRarityCountEpic>
+	<TraitRarityChangeColorEpic>Zmień kolor epickich...</TraitRarityChangeColorEpic>
+	<TraitRarityCountRare>Rzadkie cechy</TraitRarityCountRare>
+	<TraitRarityChangeColorRare>Zmień kolor rzadkich...</TraitRarityChangeColorRare>
+	<TraitRarityCountUncommon>Niepospolite cechy</TraitRarityCountUncommon>
+	<TraitRarityChangeColorUncommon>Zmień kolor niepospolitych...</TraitRarityChangeColorUncommon>
+	<TraitRarityCountCommon>Zwykłe cechy</TraitRarityCountCommon>
+	<TraitRarityChangeColorCommon>Zmień kolor zwykłych...</TraitRarityChangeColorCommon>
+	
+	<TraitRarityResetLimitsLabel>Przywróć standardowe częstotliwości</TraitRarityResetLimitsLabel>
+	<TraitRarityResetColorsLabel>Przywróć standardowe kolory</TraitRarityResetColorsLabel>
+
+	<!-- Tier Customization Window -->
+	<TraitRarityMystic>Mistyczne</TraitRarityMystic>
+	<TraitRarityLegendary>Legendarne</TraitRarityLegendary>
+	<TraitRarityEpic>Epickie</TraitRarityEpic>
+	<TraitRarityRare>Rzadkie</TraitRarityRare>
+	<TraitRarityUncommon>Niepospolite</TraitRarityUncommon>
+	<TraitRarityCommon>Zwykłe</TraitRarityCommon>
+	<TraitRarityLowerTierLabel>&lt;&lt;&lt; Niższa ranga</TraitRarityLowerTierLabel>
+	<TraitRarityLowerHigherLabel>Wyższa ranga &gt;&gt;&gt;</TraitRarityLowerHigherLabel>
+	<TraitRarityResetButtonLabel>Przywróć domyśle ustawienia</TraitRarityResetButtonLabel>
+	
+	<!-- Color Change Window -->
+	<TraitRarityChangeColorLabel>Zmień kolor, jakie miałyby być:</TraitRarityChangeColorLabel>
+	<TraitRarityResetColorLabel>Przywróć domyślny kolor</TraitRarityResetColorLabel>
+	
+	<!-- Overlay -->
+	<ShowTraitRarityOverlayToggleButton>Włączanie/wyłączanie wyświetlania znaczników bezpośrednio pod osobami na mapie.
+	.</ShowTraitRarityOverlayToggleButton>
+	<TraitRarityNoPawnSelected>Nikt</TraitRarityNoPawnSelected>
+</LanguageData>
