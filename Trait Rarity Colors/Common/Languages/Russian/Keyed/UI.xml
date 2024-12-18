@@ -3,29 +3,29 @@
 
 	<!-- Mod Options -->
 	<TraitRarityWarningLabel>Любые изменения могут потребовать перезапуска игры для применения!</TraitRarityWarningLabel>
-	<TraitRarityWarningDescription>Перезапуск не потребуется, если не было загружено сохранение или создана колония. Rimworld загружает ярлыки особенностей в кеш при загрузке сохранения (или создании колонии)</TraitRarityWarningDescription>
-	<TraitRarityCustomTierLabel>Использовать собственные ранги особенностей</TraitRarityCustomTierLabel>
-	<TraitRarityCustomTierDescription>При первом включении текущая редкость особенности будет установлена по умолчанию</TraitRarityCustomTierDescription>
-	<TraitRarityCustomTierConfigurationLabel>Настроить собственные ранги особенностей...</TraitRarityCustomTierConfigurationLabel>
-	<TraitRarityOverwriteLabel>Перезаписать цвета особенностей из других модов</TraitRarityOverwriteLabel>
-	<TraitRarityCustomTierConfigurationDescription>Цвета особенностей, определённые другими модами, не будут перезаписаны. Если же включена опция использования собственных рангов особенностей, цвета, заданные другими модами, будут переопределены</TraitRarityCustomTierConfigurationDescription>
+	<TraitRarityWarningDescription>Перезапуск не потребуется, если не было загружено сохранение или создана колония. Rimworld загружает ярлыки черт в кеш при загрузке сохранения (или создании колонии)</TraitRarityWarningDescription>
+	<TraitRarityCustomTierLabel>Использовать собственные ранги черт</TraitRarityCustomTierLabel>
+	<TraitRarityCustomTierDescription>При первом включении текущая редкость черты будет установлена по умолчанию</TraitRarityCustomTierDescription>
+	<TraitRarityCustomTierConfigurationLabel>Настроить собственные ранги черт...</TraitRarityCustomTierConfigurationLabel>
+	<TraitRarityOverwriteLabel>Перезаписать цвета черт из других модов</TraitRarityOverwriteLabel>
+	<TraitRarityCustomTierConfigurationDescription>Цвета черт, определённые другими модами, не будут перезаписаны. Если же включена опция использования собственных рангов черт, цвета, заданные другими модами, будут переопределены всегда</TraitRarityCustomTierConfigurationDescription>
 	
 	<TraitRarityMaxMommonality>Максимальная частота</TraitRarityMaxMommonality>
 	
-	<TraitRarityCountMystic>Мистические особенности</TraitRarityCountMystic>
+	<TraitRarityCountMystic>Мистические черты</TraitRarityCountMystic>
 	<TraitRarityChangeColorMystic>Изменить "мистический" цвет...</TraitRarityChangeColorMystic>
-	<TraitRarityCountLegendary>Легендарные особенности</TraitRarityCountLegendary>
+	<TraitRarityCountLegendary>Легендарные черты</TraitRarityCountLegendary>
 	<TraitRarityChangeColorLegendary>Изменить "легендарный" цвет...</TraitRarityChangeColorLegendary>
-	<TraitRarityCountEpic>Эпические особенности</TraitRarityCountEpic>
+	<TraitRarityCountEpic>Эпические черты</TraitRarityCountEpic>
 	<TraitRarityChangeColorEpic>Изменить "эпический" цвет...</TraitRarityChangeColorEpic>
-	<TraitRarityCountRare>Редкие особенности</TraitRarityCountRare>
+	<TraitRarityCountRare>Редкие черты</TraitRarityCountRare>
 	<TraitRarityChangeColorRare>Изменить "редкий" цвет...</TraitRarityChangeColorRare>
-	<TraitRarityCountUncommon>Необычные особенности</TraitRarityCountUncommon>
+	<TraitRarityCountUncommon>Необычные черты</TraitRarityCountUncommon>
 	<TraitRarityChangeColorUncommon>Изменить "необычный" цвет...</TraitRarityChangeColorUncommon>
-	<TraitRarityCountCommon>Обычные особенности</TraitRarityCountCommon>
+	<TraitRarityCountCommon>Обычные черты</TraitRarityCountCommon>
 	<TraitRarityChangeColorCommon>Изменить "обычный" цвет...</TraitRarityChangeColorCommon>
 	
-	<TraitRarityResetLimitsLabel>Восстановить ограничения по умолчанию</TraitRarityResetLimitsLabel>
+	<TraitRarityResetLimitsLabel>Восстановить критерии по умолчанию</TraitRarityResetLimitsLabel>
 	<TraitRarityResetColorsLabel>Восстановить цвета по умолчанию</TraitRarityResetColorsLabel>
 
 	<!-- Tier Customization Window -->
@@ -35,15 +35,15 @@
 	<TraitRarityRare>Редкие</TraitRarityRare>
 	<TraitRarityUncommon>Необычные</TraitRarityUncommon>
 	<TraitRarityCommon>Обычные</TraitRarityCommon>
-	<TraitRarityLowerTierLabel>&lt;&lt;&lt; Снизить ранг</TraitRarityLowerTierLabel>
+	<TraitRarityLowerTierLabel>&lt;&lt;&lt; Понизить ранг</TraitRarityLowerTierLabel>
 	<TraitRarityLowerHigherLabel>Повысить ранг &gt;&gt;&gt;</TraitRarityLowerHigherLabel>
-	<TraitRarityResetButtonLabel>Восстановить по умолчанию</TraitRarityResetButtonLabel>
+	<TraitRarityResetButtonLabel>Сброс</TraitRarityResetButtonLabel>
 	
 	<!-- Color Change Window -->
 	<TraitRarityChangeColorLabel>Настройка цвета:</TraitRarityChangeColorLabel>
 	<TraitRarityResetColorLabel>Восстановить цвет по умолчанию</TraitRarityResetColorLabel>
 	
 	<!-- Overlay -->
-	<ShowTraitRarityOverlayToggleButton>Включить отображение особенностей\n\nОтображать особенности персонажей под ними</ShowTraitRarityOverlayToggleButton>
+	<ShowTraitRarityOverlayToggleButton>Включить отображение черт\n\nОтображать черты персонажей под ними</ShowTraitRarityOverlayToggleButton>
 	<TraitRarityNoPawnSelected>Персонаж не выбран</TraitRarityNoPawnSelected>
 </LanguageData>
