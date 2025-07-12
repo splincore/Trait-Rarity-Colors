@@ -45,7 +45,7 @@ namespace TraitRarityColors
             {
                 return;
             }
-            if (!WorldRendererUtility.WorldRenderedNow && !Find.UIRoot.screenshotMode.FiltersCurrentEvent)
+            if (!WorldRendererUtility.WorldRendered && !Find.UIRoot.screenshotMode.FiltersCurrentEvent)
             {
                 TraitRarityOverlayDrawer.TraitRarityStatsOnGUI();
             }
