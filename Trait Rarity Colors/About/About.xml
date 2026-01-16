@@ -15,6 +15,9 @@
 	<loadAfter>
 		<li>brrainz.harmony</li>
 	</loadAfter>
+	<loadBefore>
+		<li>Andromeda.UsefulMarks</li>
+	</loadBefore>
 	<modDependencies>
 		<li>
 			<packageId>brrainz.harmony</packageId>
